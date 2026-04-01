@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browse Papers | PolyKatni PYQ's Portal </title>
+  <link rel="icon" href="/images/logo.jpg" type="image/jpg">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- 🔥 NAV FIX CSS -->
+  <style>
+    /* NAVBAR FIX */
+    nav {
+      background: #1f2a44;
+      color: white;
+      padding: 15px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 16px;
+      font-weight: 600;
+      color: white;
+    }
+
+    /* MENU */
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-menu li a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 14px;
+    }
+
+    /* TOGGLE */
+    .menu-toggle {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: white;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      color: white;
+    }
+
+    .logo img {
+      height: 40px;
+      width: 40px;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+
+    .logo span {
+      font-size: 16px;
+    }
+
+    /* 🔥 MOBILE */
+    @media (max-width:768px) {
+
+      nav {
+        padding: 15px 20px;
+        flex-wrap: wrap;
+        position: relative;
+      }
+
+      .logo {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+      }
+
+      .logo {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+      }
+
+      /* LEFT TOGGLE */
+      .menu-toggle {
+        display: block;
+        position: absolute;
+        left: 20px;
+        top: 15px;
+      }
+
+      /* CENTER LOGO */
+      .logo {
+        width: 100%;
+        text-align: center;
+      }
+
+      /* DROPDOWN */
+      .nav-menu {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        max-height: 0;
+        overflow: hidden;
+        transition: 0.3s;
+      }
+
+      .nav-menu.active {
+        max-height: 400px;
+      }
+
+      .nav-menu li {
+        margin: 10px 0;
+      }
+
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <header>
+    <nav>
+
+      <!-- 🔥 TOGGLE -->
+      <div class="menu-toggle" id="menuToggle"> ☰</div>
+
+      <div class="logo">
+        <img src="/images/logo.jpg" alt="College Logo">
+        <span>PolyKatni PYQ's</span>
+      </div>
+
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="/home">Home</a></li>
+        <li><a href="/browse">Browse Papers</a></li>
+        <li><a href="/aboutUs">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/uploadPage">Admin</a></li>
+      </ul>
+
+    </nav>
+  </header>
+
+  <!-- 
+main content -->
+  <main>
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <h1>Browse CSE Question Papers</h1>
+      <p>Find and download previous year question papers</p>
+    </div>
+
+    <!-- filter section  -->
+    <div class="filter-section">
+      <div class="filter-grid">
+        <div class="form-group">
+          <form action="" id="searchForm">
+            <label>Branch:</label>
+            <select name="branch" id="branch">
+              <option value="" selected>Selected-None </option>
+              <option value="COMPUTER SCIENCE">COMPUTER SCIENCE</option>
+              <option value="ELECTRICAL">ELECTRICAL</option>
+              <option value="CIVIL">CIVIL</option>
+              <option value="MECHANICAL">MECHANICAL</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+          <label>Year:</label>
+          <select name="year" id="year">
+            <option value="" selected>Selected-None </option>
+         
+            <% years.forEach(function(year) { %>
+              <option value="<%= year %>">
+                <%= year %>
+              </option>
+              <% }); %>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Semester:</label>
+          <select name="semester" id="semester" required>
+            <option value="" selected>Selected-None </option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Subject:</label>
+          <select name="subject" id="subject">
+            <option value="" selected>Selected-None </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Scheme</label>
+          <select name="scheme" id="scheme">
+            <option value="">Select Scheme</option>
+            <option value="ocbc">OCBC</option>
+          </select>
+        </div>
+
+      </div>
+
+      <button type="submit" id="button" class="filter-button"> Filter</button>
+      </form>
+
+  </main>
+
+  <!-- Results Section -->
+  <div id="results-section">
+    <div class="results-header">Results</div>
+  </div>
+
+  <div id="pagination"></div>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 CSE Question Paper Browser | All Rights Reserved
+  </footer>
+
+  <!-- 🔥 NAV TOGGLE JS (ADDED, does NOT affect your existing JS) -->
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const navMenu = document.getElementById("navMenu");
+
+    menuToggle.addEventListener("click", () => {
+      navMenu.classList.toggle("active");
+    });
+  </script>
+
+  <!-- YOUR ORIGINAL JS (UNCHANGED) -->
+  <script src="/js/script.js"></script>
+
+</body>
+
+</html>

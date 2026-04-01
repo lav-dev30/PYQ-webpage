@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PolyKatni PYQ's Portal</title>
+<link rel="icon" href="/images/logo.jpg" type="image/jpg">
+
+<style>
+
+/* RESET */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#f4f6fb;
+color:#333;
+}
+ #span{ 
+    font-weight: bold;
+ }
+
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
+font-weight:600;
+color:white;
+}
+
+.logo img{
+height:40px;
+width:40px;
+object-fit:contain;
+border-radius:6px;
+}
+
+.logo span{
+font-size:16px;
+}
+
+/* ================= NAVBAR ================= */
+
+nav{
+background:#1f2a44;
+color:white;
+padding:15px 60px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+.logo{
+font-size:18px;
+font-weight:600;
+}
+
+/* NAV LINKS */
+
+.nav-links{
+display:flex;
+align-items:center;
+}
+
+.nav-links a{
+color:white;
+text-decoration:none;
+margin-left:25px;
+font-size:14px;
+}
+
+
+
+/* TOGGLE */
+
+.menu-toggle{
+display:none;
+font-size:24px;
+cursor:pointer;
+}
+
+/* MOBILE */
+
+@media (max-width:768px){
+
+nav{
+padding:15px 20px;
+flex-wrap:wrap;
+position:relative;
+}
+
+.logo{
+width:100%;
+text-align:center;
+justify-content:center;
+}
+
+/* LEFT TOGGLE */
+.menu-toggle{
+display:block;
+position:absolute;
+left:20px;
+top:15px;
+}
+
+/* CENTER LOGO */
+.logo{
+width:100%;
+text-align:center;
+}
+
+/* DROPDOWN */
+.nav-links{
+width:100%;
+flex-direction:column;
+align-items:center;
+max-height:0;
+overflow:hidden;
+transition:0.3s;
+}
+
+.nav-links.active{
+max-height:400px;
+}
+
+.nav-links a{
+margin:12px 0;
+}
+
+}
+
+/* ================= HERO ================= */
+
+.hero{
+background:linear-gradient(120deg,#2d5bd1,#3fa4d9);
+color:white;
+text-align:center;
+padding:100px 20px;
+}
+
+.hero h1{
+font-size:36px;
+margin-bottom:10px;
+}
+
+.hero p{
+max-width:650px;
+margin:auto;
+font-size:15px;
+}
+
+/* ================= STATS ================= */
+
+.stats{
+display:flex;
+justify-content:center;
+gap:20px;
+margin-top:-40px;
+flex-wrap:wrap;
+}
+
+.stat{
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+text-align:center;
+min-width:150px;
+}
+
+.stat h2{
+color:#2d5bd1;
+}
+
+/* ================= CONTAINER ================= */
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:60px 20px;
+}
+
+/* SECTION */
+
+.section{
+text-align:center;
+margin-bottom:60px;
+}
+
+.section h2{
+margin-bottom:15px;
+}
+
+/* STEPS */
+
+.steps{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+margin-top:30px;
+}
+
+.step{
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+transition:0.3s;
+}
+
+.step:hover{
+transform:translateY(-5px);
+}
+
+.step h3{
+color:#2d5bd1;
+margin-bottom:8px;
+}
+
+
+/* LOCATION SECTION
+
+.location-wrapper{
+display:flex;
+gap:20px;
+margin-top:20px;
+flex-wrap:wrap;
+}
+
+/* MAP */
+
+.map-container{
+flex:1;
+min-width:300px;
+height:300px;
+border-radius:10px;
+overflow:hidden;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+.map-container iframe{
+width:100%;
+height:100%;
+border:0;
+} */
+
+/* INFO CARD */
+
+.info-card{
+flex:1;
+min-width:280px;
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+text-align:left;
+}
+
+.info-card h3{
+color:#2d5bd1;
+margin-bottom:10px;
+}
+
+.info-card p{
+margin:10px 0;
+font-size:14px;
+}
+
+/* MOBILE OPTIMIZATION */
+
+@media(max-width:768px){
+
+.location-wrapper{
+flex-direction:column;
+}
+
+.map-container{
+height:250px;
+}
+
+}
+
+/* BUTTON */
+
+.btn{
+display:inline-block;
+margin-top:25px;
+padding:12px 25px;
+background:#2d5bd1;
+color:white;
+text-decoration:none;
+border-radius:6px;
+}
+
+.btn:hover{
+background:#1c47a0;
+}
+
+/* ADMIN */
+
+.admin{
+background:white;
+padding:40px;
+border-radius:10px;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* FOOTER */
+
+.footer{
+background:#1f2a44;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:40px;
+}
+
+
+/* COLLEGE CARD */
+
+.college-card{
+background:white;
+padding:30px;
+border-radius:10px;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+text-align:left;
+max-width:800px;
+margin:20px auto;
+}
+
+.college-card h3{
+color:#2d5bd1;
+margin-bottom:10px;
+}
+
+.college-card p{
+font-size:14px;
+color:#555;
+margin-bottom:10px;
+}
+
+/* LOCATION WRAPPER */
+
+.location-wrapper{
+display:flex;
+gap:20px;
+margin-top:30px;
+flex-wrap:wrap;
+}
+
+.map-container{
+flex:1;
+min-width:300px;
+height:300px;
+border-radius:10px;
+overflow:hidden;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+.map-container iframe{
+width:100%;
+height:100%;
+border:0;
+}
+
+.info-card{
+flex:1;
+min-width:280px;
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+text-align:left;
+}
+
+.info-card h3{
+color:#2d5bd1;
+margin-bottom:10px;
+}
+
+.info-card p{
+margin:10px 0;
+font-size:14px;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.location-wrapper{
+flex-direction:column;
+}
+
+.map-container{
+height:250px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav>
+
+<div class="menu-toggle" id="menuToggle">☰</div>
+
+<div class="logo">
+    <img src="/images/logo.jpg" alt="College Logo">
+    <span>PolyKatni PYQ's</span>
+</div>
+
+<div class="nav-links" id="navLinks">
+<a href="/home">Home</a>
+<a href="/browse">Browse Papers</a>
+<a href="/aboutUs">About</a>
+<a href="/contact">Contact</a>
+<a href="/uploadPage">Admin</a>
+</div>
+
+</nav>
+
+<!-- HERO -->
+
+<div class="hero">
+<h1>Welcome to PolyKatni PYQ's Portal</h1>
+<p>
+A centralized platform to access <span id="span">RGVP Polytechnic Katni </span> previous year question papers easily and improve your exam preparation.
+</p>
+</div>
+
+<!-- STATS -->
+
+<div class="stats">
+
+<div class="stat">
+<h2 id="papers">120+</h2>
+<p>Papers Available</p>
+</div>
+
+<div class="stat">
+<h2 id="subjects">35+</h2>
+<p>Subjects</p>
+</div>
+
+<div class="stat">
+<h2 id="updated">Mar 2026</h2>
+<p>Last Updated</p>
+</div>
+
+</div>
+
+<!-- CONTENT -->
+
+<div class="container">
+
+<div class="section">
+<h2>How to Find Papers</h2>
+
+<div class="steps">
+
+<div class="step">
+<h3>1. Select Branch</h3>
+<p>Choose your branch</p>
+</div>
+
+<div class="step">
+<h3>2. Select Year</h3>
+<p>Pick academic year</p>
+</div>
+
+<div class="step">
+<h3>3. Choose Subject</h3>
+<p>Select subject & scheme</p>
+</div>
+
+<div class="step">
+<h3>4. Download</h3>
+<p>Get your paper instantly</p>
+</div>
+
+</div>
+
+<a href="/browse" class="btn">Browse Question Papers</a>
+
+</div>
+
+<div class="section">
+
+<h2>Admin Portal</h2>
+
+<div class="admin">
+<p>Admins can upload and manage papers.</p>
+<a href="/loginpage" class="btn">Admin Login</a>
+</div>
+
+</div>
+
+</div>
+
+<!-- 📍 COLLEGE SECTION -->
+
+<div class="section">
+<h2>About Our College</h2>
+
+<!-- 🏫 COLLEGE INFO CARD -->
+<div class="college-card">
+
+<h3>Government Polytechnic College Katni</h3>
+
+<p>
+This platform is officially organized by <strong>Government Polytechnic College Katni</strong> 
+to help students easily access previous year question papers.
+</p>
+
+<p>
+💡 This website is developed by students of the college as part of academic and practical learning, 
+aimed at improving exam preparation for all students.
+</p>
+
+<p>
+It provides a centralized and user-friendly system for browsing, downloading, and managing question papers.
+</p>
+
+</div>
+
+<!-- 📍 MAP + INFO -->
+<div class="location-wrapper">
+
+<div class="map-container">
+<iframe 
+src="https://www.google.com/maps?q=Government+Polytechnic+College+Katni&output=embed"
+loading="lazy">
+</iframe>
+</div>
+
+<div class="info-card">
+
+<h3>College Location</h3>
+
+<p><strong>📍 Address:</strong><br>
+Jhinjhri, Katni, Madhya Pradesh</p>
+
+<p><strong>📧 Email:</strong><br>
+collegeemail@gpc.example</p>
+
+<p><strong>🌐 Website:</strong><br>
+www.collegeportal.example</p>
+
+<a href="https://www.google.com/maps?q=Government+Polytechnic+College+Katni" target="_blank" class="btn">
+Open in Google Maps
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- FOOTER -->
+
+<div class="footer">
+© 2026 PolyKatni PYQ's Portal
+</div>
+
+<!-- JS -->
+
+<script>
+
+/* NAV TOGGLE */
+
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
+
+menuToggle.addEventListener("click", () => {
+navLinks.classList.toggle("active");
+});
+
+/* OPTIONAL DYNAMIC DATA */
+
+document.getElementById("papers").textContent = "120+";
+document.getElementById("subjects").textContent = "35+";
+document.getElementById("updated").textContent = "Mar 2026";
+
+</script>
+
+</body>
+</html>

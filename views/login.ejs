@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Login | PolyKatni PYQ's Portal</title>
+
+<!-- ✅ FIXED FAVICON -->
+<link rel="icon" href="/images/logo.jpg" type="image/jpg">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+/* BACKGROUND */
+
+body{
+min-height:100vh;
+background:linear-gradient(120deg,#0f172a,#1e3a8a);
+overflow:hidden;
+color:white;
+display:flex;
+flex-direction:column;
+}
+
+/* ANIMATED BLOBS */
+
+.background{
+position:fixed;
+width:100%;
+height:100%;
+top:0;
+left:0;
+z-index:-1;
+}
+
+.blob{
+position:absolute;
+width:400px;
+height:400px;
+background:radial-gradient(circle,#3b82f6,transparent);
+filter:blur(100px);
+opacity:0.5;
+animation:float 12s infinite linear;
+}
+
+.blob:nth-child(1){
+top:10%;
+left:10%;
+}
+
+.blob:nth-child(2){
+bottom:10%;
+right:10%;
+animation-duration:18s;
+}
+
+@keyframes float{
+0%{transform:translateY(0)}
+50%{transform:translateY(-60px)}
+100%{transform:translateY(0)}
+}
+
+/* NAVBAR */
+
+nav{
+background:#1f2a44;
+padding:15px 60px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+/* ✅ FIXED LOGO */
+
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
+font-weight:600;
+font-size:16px;
+}
+
+/* 🔥 LOGO IMAGE FIX */
+.logo img{
+width:40px;
+height:40px;
+object-fit:cover;
+border-radius:8px;
+}
+
+/* NAV LINKS */
+
+.nav-links{
+display:flex;
+align-items:center;
+transition:max-height 0.3s ease;
+}
+
+.nav-links a{
+color:white;
+text-decoration:none;
+margin-left:20px;
+font-size:14px;
+opacity:0.9;
+}
+
+.nav-links a:hover{
+opacity:1;
+}
+
+.menu-toggle{
+display:none;
+color:white;
+font-size:24px;
+cursor:pointer;
+}
+
+/* MOBILE NAV */
+
+@media(max-width:768px){
+
+nav{
+padding:15px 20px;
+flex-wrap:wrap;
+position:relative;
+}
+
+.menu-toggle{
+display:block;
+position:absolute;
+left:20px;
+top:15px;
+}
+
+.logo{
+width:100%;
+justify-content:center;
+margin-bottom:10px;
+}
+
+.nav-links{
+width:100%;
+flex-direction:column;
+align-items:center;
+max-height:0;
+overflow:hidden;
+}
+
+.nav-links.active{
+max-height:300px;
+}
+
+.nav-links a{
+margin:10px 0;
+}
+
+}
+
+/* BODY CENTER */
+
+#body{
+flex:1;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+/* LOGIN CARD */
+
+.container{
+width:100%;
+max-width:400px;
+padding:20px;
+}
+
+.login-box{
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(20px);
+border:1px solid rgba(255,255,255,0.1);
+padding:40px;
+border-radius:18px;
+text-align:center;
+box-shadow:0 20px 40px rgba(0,0,0,0.3);
+}
+
+.login-box h2{
+margin-bottom:30px;
+}
+
+.input-group{
+position:relative;
+margin-bottom:25px;
+}
+
+.input-group input{
+width:100%;
+padding:12px;
+background:transparent;
+border:1px solid rgba(255,255,255,0.3);
+border-radius:8px;
+color:white;
+outline:none;
+}
+
+.input-group label{
+position:absolute;
+left:12px;
+top:12px;
+font-size:14px;
+color:#ccc;
+pointer-events:none;
+transition:0.3s;
+}
+
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label{
+top:-8px;
+left:8px;
+font-size:12px;
+background:#1e3a8a;
+padding:0 4px;
+}
+
+button{
+width:100%;
+padding:12px;
+border:none;
+border-radius:8px;
+background:#3b82f6;
+color:white;
+font-size:15px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+background:#2563eb;
+}
+
+.error{
+margin-top:10px;
+color:#f87171;
+font-size:14px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="background">
+<div class="blob"></div>
+<div class="blob"></div>
+</div>
+
+<header>
+
+<nav>
+
+<div class="menu-toggle" id="menuToggle">☰</div>
+
+<!-- ✅ FIXED LOGO STRUCTURE -->
+<div class="logo">
+    <img src="/images/logo.jpg" alt="College Logo">
+    <span>PolyKatni PYQ's</span>
+</div>
+
+<div class="nav-links" id="navLinks">
+<a href="/home">Home</a>
+<a href="/browse">Browse Papers</a>
+<a href="/aboutUs">About</a>
+<a href="/contact">Contact</a>
+<a href="/UploadPage">Admin</a>
+</div>
+
+</nav>
+
+</header>
+
+<div id="body">
+
+<div class="container">
+
+<form class="login-box" id="loginForm">
+
+<h2>Login</h2>
+
+<div class="input-group">
+<input type="email" id="email" name="email" placeholder=" " required>
+<label>Email</label>
+</div>
+
+<div class="input-group">
+<input type="password" id="password" name="password" placeholder=" ">
+<label>Password</label>
+</div>
+
+<button type="submit">Login</button>
+
+<p class="error" id="errorMsg"></p>
+
+</form>
+
+</div>
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+const msg = document.getElementById("errorMsg");
+const loginform = document.getElementById("loginForm");
+
+loginform.addEventListener('submit', async (e) => {
+e.preventDefault();
+
+let form_Data = new FormData(loginform);
+const Data = Object.fromEntries(form_Data.entries());
+
+console.log(Data);
+
+try {
+
+const res = await fetch('http://localhost:5000/login', {
+method: "POST",
+headers:{
+'Content-Type':'application/json',
+},
+body:JSON.stringify({...Data})
+})
+
+const data = await res.json();
+
+if(data.success){
+window.location.href = data.redirect;
+}
+
+msg.textContent = data.msg;
+
+}catch(error){
+
+}
+
+})
+
+})
+</script>
+
+<script>
+const menuToggle=document.getElementById("menuToggle");
+const navLinks=document.getElementById("navLinks");
+
+menuToggle.addEventListener("click",()=>{
+navLinks.classList.toggle("active");
+});
+</script>
+
+</body>
+</html>
