@@ -4,7 +4,7 @@
 
 
    const form = document.getElementById("uploadForm");
-   const  msg= document.getElementById("msg");
+   const  msg= document.getElementById("message");
 
       form.addEventListener("submit", async (e) => {
         e.preventDefault();

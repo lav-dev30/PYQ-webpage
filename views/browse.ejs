@@ -4,126 +4,96 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Browse Papers | PolyKatni PYQ's Portal </title>
-  <link rel="icon" href="/images/logo.jpg" type="image/jpg">
-  <link rel="stylesheet" href="css/style.css">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/browse.css">
 
   <!-- 🔥 NAV FIX CSS -->
   <style>
-    /* NAVBAR FIX */
-    nav {
-      background: #1f2a44;
-      color: white;
-      padding: 15px 60px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+
+  /* NAVBAR FIX */
+  nav{
+    background:#1f2a44;
+    color:white;
+    padding:15px 60px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+  }
+
+  .logo{
+    font-size:16px;
+    font-weight:600;
+    color:white;
+  }
+
+  /* MENU */
+  .nav-menu{
+    display:flex;
+    list-style:none;
+    align-items:center;
+  }
+
+  .nav-menu li a{
+    color:white;
+    text-decoration:none;
+    margin-left:20px;
+    font-size:14px;
+  }
+
+  /* TOGGLE */
+  .menu-toggle{
+    display:none;
+    font-size:24px;
+    cursor:pointer;
+    color:white;
+  }
+
+  /* 🔥 MOBILE */
+  @media (max-width:768px){
+
+    nav{
+      padding:15px 20px;
+      flex-wrap:wrap;
+      position:relative;
     }
 
-    .logo {
-      font-size: 16px;
-      font-weight: 600;
-      color: white;
+    /* LEFT TOGGLE */
+    .menu-toggle{
+      display:block;
+      position:absolute;
+      left:20px;
+      top:15px;
     }
 
-    /* MENU */
-    .nav-menu {
-      display: flex;
-      list-style: none;
-      align-items: center;
+    /* CENTER LOGO */
+    .logo{
+      width:100%;
+      text-align:center;
     }
 
-    .nav-menu li a {
-      color: white;
-      text-decoration: none;
-      margin-left: 20px;
-      font-size: 14px;
+    /* DROPDOWN */
+    .nav-menu{
+      width:100%;
+      flex-direction:column;
+      align-items:center;
+      max-height:0;
+      overflow:hidden;
+      transition:0.3s;
     }
 
-    /* TOGGLE */
-    .menu-toggle {
-      display: none;
-      font-size: 24px;
-      cursor: pointer;
-      color: white;
+    .nav-menu.active{
+      max-height:400px;
     }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 600;
-      color: white;
+    .nav-menu li{
+      margin:10px 0;
     }
 
-    .logo img {
-      height: 40px;
-      width: 40px;
-      object-fit: contain;
-      border-radius: 6px;
-    }
+  }
 
-    .logo span {
-      font-size: 16px;
-    }
-
-    /* 🔥 MOBILE */
-    @media (max-width:768px) {
-
-      nav {
-        padding: 15px 20px;
-        flex-wrap: wrap;
-        position: relative;
-      }
-
-      .logo {
-        width: 100%;
-        text-align: center;
-        justify-content: center;
-      }
-
-      .logo {
-        width: 100%;
-        text-align: center;
-        justify-content: center;
-      }
-
-      /* LEFT TOGGLE */
-      .menu-toggle {
-        display: block;
-        position: absolute;
-        left: 20px;
-        top: 15px;
-      }
-
-      /* CENTER LOGO */
-      .logo {
-        width: 100%;
-        text-align: center;
-      }
-
-      /* DROPDOWN */
-      .nav-menu {
-        width: 100%;
-        flex-direction: column;
-        align-items: center;
-        max-height: 0;
-        overflow: hidden;
-        transition: 0.3s;
-      }
-
-      .nav-menu.active {
-        max-height: 400px;
-      }
-
-      .nav-menu li {
-        margin: 10px 0;
-      }
-
-    }
   </style>
 
 </head>
@@ -134,17 +104,14 @@
     <nav>
 
       <!-- 🔥 TOGGLE -->
-      <div class="menu-toggle" id="menuToggle"> ☰</div>
+      <div class="menu-toggle" id="menuToggle">☰</div>
 
-      <div class="logo">
-        <img src="/images/logo.jpg" alt="College Logo">
-        <span>PolyKatni PYQ's</span>
-      </div>
+      <div class="logo">PolyKatni PYQ's</div>
 
       <ul class="nav-menu" id="navMenu">
         <li><a href="/home">Home</a></li>
         <li><a href="/browse">Browse Papers</a></li>
-        <li><a href="/aboutUs">About</a></li>
+        <li><a href="/aboutUs">About us</a></li>
         <li><a href="/contact">Contact</a></li>
         <li><a href="/uploadPage">Admin</a></li>
       </ul>
@@ -158,7 +125,7 @@ main content -->
 
     <!-- Page Header -->
     <div class="page-header">
-      <h1>Browse CSE Question Papers</h1>
+      <h1>Browse previous Question Papers</h1>
       <p>Find and download previous year question papers</p>
     </div>
 
@@ -166,62 +133,67 @@ main content -->
     <div class="filter-section">
       <div class="filter-grid">
         <div class="form-group">
-          <form action="" id="searchForm">
+            <form action="" id="searchForm">
             <label>Branch:</label>
             <select name="branch" id="branch">
-              <option value="" selected>Selected-None </option>
+              <option value="" selected >Selected-None </option>
               <option value="COMPUTER SCIENCE">COMPUTER SCIENCE</option>
               <option value="ELECTRICAL">ELECTRICAL</option>
               <option value="CIVIL">CIVIL</option>
               <option value="MECHANICAL">MECHANICAL</option>
             </select>
-        </div>
+          </div>
 
-        <div class="form-group">
-          <label>Year:</label>
-          <select name="year" id="year">
-            <option value="" selected>Selected-None </option>
-         
-            <% years.forEach(function(year) { %>
-              <option value="<%= year %>">
-                <%= year %>
-              </option>
-              <% }); %>
-          </select>
-        </div>
+          <div class="form-group">
+            <label>Year:</label>
+            <select name="year" id="year">
+              <option value="" selected >Selected-None </option>
+              <option value="2024">2024</option>
+              <option value="2025">2025</option>
+              <option value="2023">2023</option>
+              <option value="2022">2022</option>
+              <option value="2021">2021</option>
+              <option value="2020">2020</option>
+              <option value="2019">2019</option>
+              <option value="2018">2018</option>
+              <option value="2017">2017</option>
+              <option value="2016">2016</option>
+              <option value="2015">2015</option>
+            </select>
+          </div>
 
-        <div class="form-group">
-          <label>Semester:</label>
-          <select name="semester" id="semester" required>
-            <option value="" selected>Selected-None </option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-          </select>
-        </div>
+          <div class="form-group">
+            <label>Semester:</label>
+            <select name="semester" id="semester" required>
+              <option value="" selected >Selected-None </option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </div>
 
-        <div class="form-group">
-          <label>Subject:</label>
-          <select name="subject" id="subject">
-            <option value="" selected>Selected-None </option>
-          </select>
-        </div>
+          <div class="form-group">
+            <label>Subject:</label>
+            <select name="subject" id="subject">
+              <option value="" selected >Selected-None </option>
+            </select>
+          </div>
 
-        <div class="form-group">
-          <label>Scheme</label>
-          <select name="scheme" id="scheme">
-            <option value="">Select Scheme</option>
-            <option value="ocbc">OCBC</option>
-          </select>
-        </div>
+          <div class="form-group">
+            <label>Scheme</label>
+            <select name="scheme" id="scheme">
+              <option value="">Select Scheme</option>
+              <option value="ocbc">OCBC</option>
+            </select>
+          </div>
 
       </div>
 
       <button type="submit" id="button" class="filter-button"> Filter</button>
-      </form>
+       </form>
 
   </main>
 
@@ -242,13 +214,13 @@ main content -->
     const menuToggle = document.getElementById("menuToggle");
     const navMenu = document.getElementById("navMenu");
 
-    menuToggle.addEventListener("click", () => {
+    menuToggle.addEventListener("click", ()=>{
       navMenu.classList.toggle("active");
     });
   </script>
 
   <!-- YOUR ORIGINAL JS (UNCHANGED) -->
-  <script src="/js/script.js"></script>
+  <script src="/js/browse.js"></script>
 
 </body>
 

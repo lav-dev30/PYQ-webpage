@@ -3,3 +3,5 @@
 
 # Ignore the node_modules folder and its contents
 node_modules/
+uploadcss.txt
+uploadejs.txt

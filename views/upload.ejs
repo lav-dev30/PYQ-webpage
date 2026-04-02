@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Upload Papers | PolyKatni PYQ's Portal</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 
-<link rel="icon" href="/images/logo.jpg" type="image/jpg">
-<link rel="stylesheet" href="css/upload.css">
-
+  <link rel="stylesheet" href="css/upload.css">
+<!-- 🔥 NAV FIX CSS -->
 <style>
 
-/* ================= NAVBAR ================= */
-
+/* NAVBAR */
 nav{
 background:#1f2a44;
 color:white;
-padding:15px 80px;
+padding:15px 60px;
 display:flex;
 justify-content:space-between;
 align-items:center;
@@ -25,17 +24,8 @@ z-index:1000;
 }
 
 .logo{
-display:flex;
-align-items:center;
-gap:10px;
+font-size:16px;
 font-weight:600;
-}
-
-.logo img{
-width:40px;
-height:40px;
-border-radius:8px;
-object-fit:cover;
 }
 
 /* MENU */
@@ -46,33 +36,10 @@ align-items:center;
 }
 
 .nav-menu li a{
-position:relative;
 color:white;
 text-decoration:none;
-margin-left:30px;
+margin-left:20px;
 font-size:14px;
-padding-bottom:5px;
-}
-
-/* 🔥 HOVER ANIMATION */
-.nav-menu li a::after{
-content:"";
-position:absolute;
-left:0;
-bottom:0;
-width:0%;
-height:2px;
-background:#3b82f6;
-transition:0.3s;
-}
-
-.nav-menu li a:hover::after{
-width:100%;
-}
-
-/* LOGOUT COLOR */
-.logout{
-color:#ff6b6b;
 }
 
 /* TOGGLE */
@@ -82,7 +49,7 @@ font-size:24px;
 cursor:pointer;
 }
 
-/* MOBILE */
+/* 🔥 MOBILE */
 @media (max-width:768px){
 
 nav{
@@ -91,6 +58,7 @@ flex-wrap:wrap;
 position:relative;
 }
 
+/* LEFT TOGGLE */
 .menu-toggle{
 display:block;
 position:absolute;
@@ -98,12 +66,13 @@ left:20px;
 top:15px;
 }
 
+/* CENTER LOGO */
 .logo{
 width:100%;
-justify-content:center;
-margin-bottom:10px;
+text-align:center;
 }
 
+/* DROPDOWN */
 .nav-menu{
 width:100%;
 flex-direction:column;
@@ -121,150 +90,49 @@ max-height:300px;
 margin:10px 0;
 }
 
-.nav-menu li a{
-margin-left:0;
-}
-
-}
-
-/* ================= LOGOUT MODAL ================= */
-
-.logout-modal{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.4);
-backdrop-filter:blur(8px);
-display:flex;
-justify-content:center;
-align-items:center;
-opacity:0;
-pointer-events:none;
-transition:0.3s;
-z-index:2000;
-}
-
-.logout-modal.active{
-opacity:1;
-pointer-events:auto;
-}
-
-.modal-box{
-background:rgba(255,255,255,0.1);
-border:1px solid rgba(255,255,255,0.2);
-backdrop-filter:blur(20px);
-padding:25px;
-border-radius:16px;
-text-align:center;
-width:320px;
-color:white;
-animation:scaleUp 0.3s ease;
-}
-
-@keyframes scaleUp{
-from{transform:scale(0.8); opacity:0;}
-to{transform:scale(1); opacity:1;}
-}
-
-.modal-box h3{
-margin-bottom:10px;
-}
-
-.modal-box p{
-font-size:14px;
-margin-bottom:20px;
-opacity:0.8;
-}
-
-.modal-buttons{
-display:flex;
-gap:10px;
-}
-
-.cancel-btn{
-flex:1;
-padding:10px;
-border:none;
-background:#94a3b8;
-border-radius:6px;
-cursor:pointer;
-}
-
-.confirm-btn{
-flex:1;
-padding:10px;
-text-decoration:none;
-text-align:center;
-background:#ef4444;
-color:white;
-border-radius:6px;
-}
-
-.cancel-btn:hover{
-background:#64748b;
-}
-
-.confirm-btn:hover{
-background:#dc2626;
 }
 
 </style>
 
+
 </head>
 
 <body>
-
-<!-- NAVBAR -->
+<!-- 🌐 NAVBAR -->
 <nav>
 
 <div class="menu-toggle" id="menuToggle">☰</div>
 
-<div class="logo">
-<img src="/images/logo.jpg" alt="Logo">
-<span>PolyKatni PYQ's</span>
-</div>
+<div class="logo">College Portal</div>
 
 <ul class="nav-menu" id="navMenu">
 <li><a href="/Home">Home</a></li>
 <li><a href="#">Upload Paper</a></li>
+<li><a href="/createAdmin">Sign Up</a></li>
+<li><a href="/logout">Log Out</a></li>
 <li><a href="/delete">Delete Papers</a></li>
-<li><a href="#" id="logoutBtn" class="logout">Log Out</a></li>
 </ul>
 
 </nav>
 
-<!-- LOGOUT MODAL -->
-<div class="logout-modal" id="logoutModal">
-  <div class="modal-box">
-    <h3>⚠️ Confirm Logout</h3>
-    <p>Are you sure you want to log out of admin panel?</p>
 
-    <div class="modal-buttons">
-      <button class="cancel-btn" id="cancelLogout">Cancel</button>
-      <a href="/logout" class="confirm-btn">Yes, Logout</a>
-    </div>
+
+  <div class="container">
+    <h1>📚 Upload Exam Paper</h1>
+
+    <form id="uploadForm" enctype="multipart/form-data">
+      <input type="text" name="branch" placeholder="Branch" required>
+      <input type="text" name="year" placeholder="Year" required>
+      <input type="text" name="semester" placeholder="Semester" required>
+      <input type="text" name="subject" placeholder="Subject" required>
+      <input type="file" name="file" required>
+      <button type="submit" id="button">Upload Paper</button>
+    </form>
+
+    <p id="message">Result will be shown here</p>
   </div>
-</div>
 
-<!-- MAIN -->
-<div class="container">
-<h1>📚 Upload Exam Paper</h1>
-
-<form id="uploadForm" enctype="multipart/form-data">
-<input type="text" name="branch" placeholder="Branch" required>
-<input type="text" name="year" placeholder="Year" required>
-<input type="text" name="semester" placeholder="Semester" required>
-<input type="text" name="subject" placeholder="Subject" required>
-<input type="file" name="file" required>
-<button type="submit">Upload Paper</button>
-</form>
-
-<p id="msg"></p>
-</div>
-
-<!-- NAV TOGGLE JS -->
+  <!-- 🔥 NAV TOGGLE JS -->
 <script>
 const menuToggle = document.getElementById("menuToggle");
 const navMenu = document.getElementById("navMenu");
@@ -274,30 +142,7 @@ navMenu.classList.toggle("active");
 });
 </script>
 
-<!-- 🔥 NEW LOGOUT MODAL JS -->
-<script>
-const logoutBtn = document.getElementById("logoutBtn");
-const logoutModal = document.getElementById("logoutModal");
-const cancelLogout = document.getElementById("cancelLogout");
-
-logoutBtn.addEventListener("click", (e)=>{
-e.preventDefault();
-logoutModal.classList.add("active");
-});
-
-cancelLogout.addEventListener("click", ()=>{
-logoutModal.classList.remove("active");
-});
-
-logoutModal.addEventListener("click", (e)=>{
-if(e.target === logoutModal){
-logoutModal.classList.remove("active");
-}
-});
-</script>
-
-<!-- YOUR ORIGINAL JS (UNCHANGED) -->
-<script src="js/upload.js"></script>
-
+  <script src="js/upload.js"></script>
 </body>
+
 </html>
