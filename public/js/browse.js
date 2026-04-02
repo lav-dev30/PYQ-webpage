@@ -108,12 +108,14 @@ try {
       const div = document.createElement("div");
       div.setAttribute("id", "paper-item");
       div.innerHTML = ` 
+                <div class= "paper-card">
                   <div class="paper-title">${paper.subject}</div>
                   <div class="paper-info">
                       <span>${paper.branch} – ${paper.year}</span>
                       <span>Sem ${paper.semester}</span>
                       <span class="badge">OCBC</span>
                       <span class= "pdf"> <a href= "${paper.file_path}" target="_blank">View Here</a> </span>
+                  </div>
                   </div>
               `
       paperList.appendChild(div);

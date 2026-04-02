@@ -94,6 +94,78 @@
 
   }
 
+
+
+  /* Individual Card Design */
+.paper-card {
+    background-color: #ffffff; /* White theme */
+    border-radius: 12px;
+    padding: 20px;
+    margin: 15px;
+    width: 97%; /* Fixed width for grid look */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border: 1px solid #f0f0f0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: inline-block; /* Or use Flexbox on a parent container */
+    vertical-align: top;
+}
+
+/* Hover Effect */
+.paper-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Content Spacing */
+.paper-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #2d3436;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+}
+
+.paper-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 0.9rem;
+    color: #636e72;
+}
+
+/* Badge Styling */
+.badge {
+    background-color: #e3f2fd;
+    color: #007bff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    width: fit-content;
+}
+
+/* Button/Link Styling */
+.pdf a {
+    /* display: block; */
+    text-align: center;
+    margin-top: 15px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    padding: 8px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.pdf{
+  margin-top: 5px;
+}
+
+.pdf a:hover {
+    background-color: #0056b3;
+}
+
+
   </style>
 
 </head>
