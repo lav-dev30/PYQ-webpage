@@ -25,7 +25,7 @@ try {
     // console.log(query)
     
   
-    const res = await fetch(`http://localhost:5000/subjects?${query}`);
+    const res = await fetch(`/subjects?${query}`);
     const subjects = await res.json();
     // console.log(subjects)
   
@@ -84,7 +84,7 @@ try {
   
     // Send as JSON to backend\
   
-      const res = await fetch('http://localhost:5000/exam', {
+      const res = await fetch('/exam', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
