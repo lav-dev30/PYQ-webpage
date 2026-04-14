@@ -254,6 +254,34 @@ color:#f87171;
 font-size:14px;
 }
 
+
+
+#loader {
+  display: none;
+width: 100%;
+z-index: 9999;
+}
+
+/* The Spinner Design */
+.spinner {
+  width: 30px;
+  height: 30px;
+  /* border: 5px solid rgba(255, 255, 255, 0.1); Faint track */
+  border-top: 5px solid #b7cae9;
+  /* Bright blue spinning part */
+  border-radius: 50%;
+  
+
+  animation: spin 1s linear infinite;
+}
+
+/* The Animation Logic */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+
 </style>
 
 </head>
@@ -333,15 +361,26 @@ console.log(Data);
 
 try {
 
-const res = await fetch('/login', {
-method: "POST",
-headers:{
-'Content-Type':'application/json',
-},
-body:JSON.stringify({...Data})
-})
+// button.innerHTML= "";
+//   button.innerHTML =  `<div id="loader">
+//    <div class="spinner"></div>
+//   </div>
+//   </div>
+//   `
 
-const data = await res.json();
+  
+  const res = await fetch('/login', {
+      method: "POST",
+      headers:{
+          'Content-Type':'application/json',
+        },
+        body:JSON.stringify({...Data})
+    })
+    
+    // const loader = document.getElementById('loader');
+    // loader.style.setProperty('display', 'flex', 'important');
+
+    const data = await res.json();
 
 if(data.success){
 window.location.href = data.redirect;

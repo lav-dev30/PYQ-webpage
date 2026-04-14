@@ -87,10 +87,12 @@ app.post('/upload', isLoggedIn, upload.single('file'), async function (req, res,
     let { branch, year, semester, subject } = req.body;
     const file_path = `/uploads/${req.file.filename}`;
     const filepath = req.file.path;
-    console.log(filepath);
+    // console.log(filepath);
 
     branch = branch.toUpperCase();
+    branch = branch.trim();
     subject = subject.toUpperCase();
+    subject = subject.trim();
 
 
     // check if the paper is already exists
@@ -110,9 +112,11 @@ app.post('/upload', isLoggedIn, upload.single('file'), async function (req, res,
       folder: "Exam_papers",
       use_filename: true,
       unique_filename: false,
-      resource_type: "raw"
+      resource_type: "raw",
+      timeout: 60000
     });
 
+  
     const papers = new Papers({
       branch, year, semester, subject, file_path: result.secure_url, publicId: result.public_id
     });
@@ -125,6 +129,7 @@ app.post('/upload', isLoggedIn, upload.single('file'), async function (req, res,
 
   } catch (error) {
     if (req.file) fs.unlinkSync(req.file.path); // Clean up even if upload fails
+    console.error("error:",error);
     return res.status(500).json({ error: error.message });
   }
 });

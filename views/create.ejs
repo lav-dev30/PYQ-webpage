@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up | Admin</title>
     <link rel="stylesheet" href="css/create.admin.css">
 </head>
+
 <body>
     <div class="signup-box">
         <h2>Create Account</h2>
-       <form action="/createAdmin" method="post">
+        <form action="/createAdmin" method="post" id="form">
             <div class="field">
                 <label>Username</label>
-                <input type="text"  name="username" placeholder="Choose a username" required>
+                <input type="text" name="username" placeholder="Choose a username" required>
             </div>
 
             <div class="field">
@@ -25,8 +27,29 @@
                 <input type="password" name="password" placeholder="Password" required>
             </div>
 
-            <button type="submit" class="signup-btn">Sign Up</button>
+            <button type="submit" class="signup-btn" id="button">Sign Up</button>
         </form>
     </div>
+
+
+    <script>
+        const form = document.getElementById("form");
+        const button = document.getElementById("button");
+        form.addEventListener("submit", () => {
+            button.innerHTML = "";
+            button.innerHTML = `<div id="loader">
+                                     <div id= "paragraph">
+                                    <p>Creating... Please wait</p>
+                                      </div>
+                               <div class="spinner"></div>
+                                    </div>
+                                    </div>`
+
+            const loader = document.getElementById('loader');
+            loader.style.setProperty('display', 'flex', 'important');
+        })
+
+    </script>
 </body>
+
 </html>

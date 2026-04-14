@@ -69,3 +69,44 @@ h2 {
 .signup-btn:hover {
     background-color: #1d4ed8;
 }
+
+
+
+/* Animation */
+
+
+
+#loader {
+  display: none;
+width: 100%;
+z-index: 9999;
+}
+
+/* The Spinner Design */
+.spinner {
+  width: 16px;
+  height: 16px;
+  /* border: 5px solid rgba(255, 255, 255, 0.1); Faint track */
+  border-top: 5px solid #3b82f6;
+  /* Bright blue spinning part */
+  border-radius: 50%;
+  
+
+  animation: spin 1s linear infinite;
+}
+
+/* The Animation Logic */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+#loader p {
+  display: inline;
+}
+
+
+#paragraph {
+  display: inline;
+  margin: auto;
+}

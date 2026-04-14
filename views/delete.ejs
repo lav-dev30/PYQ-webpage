@@ -273,7 +273,7 @@ input[type="number"]:focus{
 border-color:#1976d2;
 }
 
-.btn-delete{
+#btn-delete{
 width:100%;
 padding:12px;
 background-color:#d93025;
@@ -286,8 +286,48 @@ cursor:pointer;
 transition:0.2s;
 }
 
-.btn-delete:hover{
+#btn-delete:hover{
 background-color:#b31412;
+}
+
+
+/* Animation */
+
+
+
+#loader {
+  display: none;
+width: 100%;
+z-index: 9999;
+}
+
+/* The Spinner Design */
+.spinner {
+  width: 16px;
+  height: 16px;
+  /* border: 5px solid rgba(255, 255, 255, 0.1); Faint track */
+  border-top: 5px solid #3b82f6;
+  /* Bright blue spinning part */
+  border-radius: 50%;
+  
+
+  animation: spin 1s linear infinite;
+}
+
+/* The Animation Logic */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+#loader p {
+  display: inline;
+}
+
+
+#paragraph {
+  display: inline;
+  margin: auto;
 }
 
 </style>
@@ -336,14 +376,14 @@ background-color:#b31412;
 <h1>Delete Papers</h1>
 <p>Enter a year to remove all associated records.</p>
 
-<form action="/deletePapers" method="POST">
+<form action="/deletePapers" method="POST" id="form">
 
 <input type="number" 
 name="year" 
 placeholder="Enter Year (e.g. 2024)" 
 min="2010">
 
-<button type="submit" class="btn-delete">
+<button type="submit" id="btn-delete">
 Delete All Papers
 </button>
 
@@ -365,9 +405,31 @@ navMenu.classList.toggle("active");
 
 <!-- 🔥 LOGOUT MODAL JS -->
 <script>
+const delete_btn = document.getElementById("btn-delete");
+const form = document.getElementById("form");
+
 const logoutBtn = document.getElementById("logoutBtn");
 const logoutModal = document.getElementById("logoutModal");
 const cancelLogout = document.getElementById("cancelLogout");
+
+form.addEventListener("submit", ()=>{
+
+
+   delete_btn.innerHTML = "";
+  delete_btn.innerHTML = `<div id="loader">
+     <div id= "paragraph">
+  <p>Deleting... Please wait</p>
+  </div>
+    <div class="spinner"></div>
+</div>
+</div>
+`
+ const loader = document.getElementById('loader');
+  loader.style.setProperty('display', 'flex', 'important');
+
+
+})
+
 
 logoutBtn.addEventListener("click", (e)=>{
 e.preventDefault();

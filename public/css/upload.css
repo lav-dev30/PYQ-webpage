@@ -219,9 +219,10 @@ z-index: 9999;
 }
 
 /* The Spinner Design */
+
 .spinner {
-  width: 50px;
-  height: 50px;
+  width: 16px;
+  height: 16px;
   /* border: 5px solid rgba(255, 255, 255, 0.1); Faint track */
   border-top: 5px solid #3b82f6;
   /* Bright blue spinning part */
