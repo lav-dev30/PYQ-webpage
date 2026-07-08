@@ -11,45 +11,104 @@
 <body>
     <div class="signup-box">
         <h2>Create Account</h2>
-        <form action="/createAdmin" method="post" id="form">
-            <div class="field">
-                <label>Username</label>
-                <input type="text" name="username" placeholder="Choose a username" required>
-            </div>
+       <form action="/createAdmin" method="post" id="form">
+    <div class="field">
+        <label>Username</label>
+        <input type="text" name="username" placeholder="Choose a username" required>
+    </div>
 
-            <div class="field">
-                <label>Email</label>
-                <input type="email" name="email" placeholder="email@example.com" required>
-            </div>
+    <div class="field">
+        <label>Email</label>
+        <input type="email" name="email" id="email" placeholder="email@example.com" required>
+    </div>
 
-            <div class="field">
-                <label>Password</label>
-                <input type="password" name="password" placeholder="Password" required>
-            </div>
+    <!-- Generate OTP (changed type) -->
+    <button type="button" class="signup-btn" id="button2">Generate OTP</button>
 
-            <button type="submit" class="signup-btn" id="button">Sign Up</button>
-        </form>
+    <!-- OTP field (hidden initially) -->
+    <div class="field" id="otpField" style="display:none;">
+        <label>Enter OTP</label>
+        <input type="text" name="otp" id="otp" placeholder="Enter OTP">
+    </div>
+
+    <div class="field" id = "passwordField" style = "display:none;">
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Password" required>
+    </div>
+
+    <!-- Sign Up hidden initially -->
+    <button type="submit" class="signup-btn" id="button" style="display:none;">
+        Sign Up
+    </button>
+</form>
     </div>
 
 
     <script>
-        const form = document.getElementById("form");
-        const button = document.getElementById("button");
-        form.addEventListener("submit", () => {
-            button.innerHTML = "";
-            button.innerHTML = `<div id="loader">
-                                     <div id= "paragraph">
-                                    <p>Creating... Please wait</p>
-                                      </div>
-                               <div class="spinner"></div>
-                                    </div>
-                                    </div>`
+const form = document.getElementById("form");
+const button = document.getElementById("button");   // Sign Up
+const otpBtn = document.getElementById("button2");  // Generate OTP
+const otpField = document.getElementById("otpField");
+const emailInput = document.getElementById("email");
+const passwordField = document.getElementById("passwordField");
 
-            const loader = document.getElementById('loader');
-            loader.style.setProperty('display', 'flex', 'important');
-        })
+// 🔹 Generate OTP
+otpBtn.addEventListener("click", async () => {
+    const email = emailInput.value;
 
-    </script>
+    if (!email) {
+        alert("Enter email first");
+        return;
+    }
+
+    try {
+        const res = await fetch("/send-otp", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ email })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+            alert("OTP sent to email");
+
+            // Show OTP field + signup button
+            otpField.style.display = "block";
+            button.style.display = "block";
+            passwordField.style.display = "block"
+
+            // Disable email + otp button
+            emailInput.readOnly = true;
+            otpBtn.style.display = "none";
+        } else {
+            alert(data.error || "Failed to send OTP");
+        }
+
+    } catch (err) {
+        console.error(err);
+        alert("Error sending OTP");
+    }
+});
+
+
+// 🔹 Signup submit (your animation untouched)
+form.addEventListener("submit", () => {
+    button.innerHTML = `
+        <div id="loader">
+            <div id="paragraph">
+                <p>Creating... Please wait</p>
+            </div>
+            <div class="spinner"></div>
+        </div>
+    `;
+
+    const loader = document.getElementById('loader');
+    loader.style.setProperty('display', 'flex', 'important');
+});
+</script>
 </body>
 
 </html>

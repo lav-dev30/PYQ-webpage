@@ -13,7 +13,8 @@ const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 const Papers = require('./model/paper')
 const admin = require('./model/admin');
-
+const Otp = require('./model/otp');
+const transporter = require("./util/mailer")
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -33,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 connectDB();
 
 
+// middlewares
 
 
 const storage = multer.diskStorage({
@@ -75,7 +77,12 @@ function isLoggedIn2(req, res, next) {
 }
 
 
+function generateOTP(){
+  return Math.floor(100000 + Math.random()* 900000).toString();
+}
 
+
+// routes
 
 app.get('/', function (req, res, err) {
   res.render('index');
@@ -262,32 +269,122 @@ app.get("/createAdmin", function (req, res) {
   res.render("create");
 })
 
-app.post("/createAdmin", function (req, res, err) {
-  const { username, email, password } = req.body;
+app.post("/send-otp", async(req , res) =>{
+  const {email} = req.body;
+ 
+  
+   // prevent spam
 
-  bcrypt.genSalt(10, function (err, salt) {
-    bcrypt.hash(password, salt, async function (err, hash) {
+  const existing = await Otp.findOne({ email });
+  if (existing) {
+    // return res.status(400).json({ error: "OTP already sent. Wait." });
+     await Otp.deleteMany({ email });
+  }
 
-      try {
-        let createdUser = await admin({
-          username,
-          email,
-          password: hash
-        })
-        await createdUser.save();
-        res.send("done");
+  const otp = generateOTP();
+ 
 
-      } catch (error) {
+  await Otp.create({
+    email,
+    otp,
+    expiresAt: new Date(Date.now() + 5 * 60 * 1000),
+  });
+
+  await transporter.sendMail({
+    to: email,
+    subject: "OTP For Email Verification",
+    text: `Dear Student,
+
+Your One-Time Password (OTP) for completing your registration in Polytechnic Katni PYQ portal is: ${otp}
+
+This OTP is valid for 5 minutes. Please do not share this OTP with anyone.
+
+If you did not initiate this request, please ignore this email.
+
+Regards,  
+PYQ Registration Team`
+  });
+
+  // console.log(res);
+
+  res.json({ message: "OTP sent" });
+})
+
+app.post("/createAdmin", async function (req, res, err) {
+  const { username, email, password , otp } = req.body;
+  const saltround = 10;
+
+
+   try {
+   
+    console.log(email,password,otp);
+
+    // 1. Check OTP
+    const record = await Otp.findOne({ email, otp });
+    console.log(record);
+
+    if (!record) {
+      return res.status(400).json({ error: "Invalid OTP" });
+    }
+
+    if (record.expiresAt < new Date()) {
+      return res.status(400).json({ error: "OTP expired" });
+    }
+
+    // 2. Check if user already exists
+    const existingUser = await admin.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ error: "User already exists" });
+    }
+
+try {
+  
+    //   bcrypt.genSalt(10, function (err, salt) {
+    //   bcrypt.hash(password, salt, async function (err, hash) {
+  
+      
+    //       let createdUser = await admin({
+    //         username,
+    //         email,
+    //         password: hash
+    //       })
+    //       await createdUser.save();
+        
+    //   });
+    // });
+
+    bcrypt.hash(password, saltround, async function (err, hash){
+
+      if(err){
+        console.error(err);
+        return;
+      }
+
+       const createdUser = new admin({
+            username,
+            email,
+            password: hash
+          })
+           await createdUser.save();
+        
+    })
+
+      // 5. Delete OTP after success
+         await Otp.deleteMany({ email });
+} catch (error) {
+  throw error;
+}
+
+  return res.json({ message: "User registered successfully" });
+
+    } catch (error) {
+     
         res.status(403).json({ error: "user did not create" });
 
       }
 
     })
-  })
-
-
-
-})
+ 
 
 app.get('/logout', function (req, res) {
   res.cookie('token', "");
